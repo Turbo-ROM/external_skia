@@ -57,6 +57,7 @@ ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
 endif
 
+ifeq ($(TURBO_GENERAL_OPTS),true)
 LOCAL_CFLAGS += \
 	-O3 \
 	-Wno-unused-parameter \
@@ -64,6 +65,15 @@ LOCAL_CFLAGS += \
 	-D_FORTIFY_SOURCE=0 \
 	-DSKIA_IMPLEMENTATION=1 \
 	-Wno-clobbered
+else
+LOCAL_CFLAGS += \
+	-fPIC \
+	-Wno-unused-parameter \
+	-U_FORTIFY_SOURCE \
+	-D_FORTIFY_SOURCE=1 \
+	-DSKIA_IMPLEMENTATION=1 \
+	-Wno-clobbered
+endif
 
 LOCAL_CPPFLAGS := \
 	-std=c++11 \
